@@ -1,0 +1,16 @@
+{
+  "name": "survey-server",
+  "version": "1.0.0",
+  "description": "a simple server for my survey project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kamran.miadi",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^2.14.1",
+    "q": "^1.5.1",
+    "sqlite3": "^4.2.0"
+  }
+}
