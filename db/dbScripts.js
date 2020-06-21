@@ -9,7 +9,7 @@ let db = new sqlite.Database(`${dbName}.db`, (err) => {
     }
 });
 
-db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT, answers TEXT, score TEXT)`)
+db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT,accessToMedia TEXT, accessToEngMen TEXT, hasTraveled TEXT, startedLearningAt TEXT, learningTime TEXT,score TEXT)`)
 
 db.close((err) => {
 if (err) {

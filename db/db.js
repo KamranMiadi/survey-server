@@ -19,7 +19,7 @@ class DataBase {
 
     createTable() {
         let self = this;
-        db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT, answers TEXT, score TEXT)`)
+        db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT,accessToMedia TEXT, accessToEngMen TEXT, hasTraveled TEXT, startedLearningAt TEXT, learningTime TEXT,score TEXT)`)
             .then(function (result) {}).fail(function (err) {
                 console.error('error in createTable------------------->', err);
             });
@@ -39,8 +39,8 @@ class DataBase {
 
         });
         let defered = q.defer();
-        db.run(`INSERT INTO ${usersTableName}(userId, firstName, lastName, major, age, gender, engPerc, year, province, answers, score) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [data.userId, data.firstName, data.lastName, data.major, data.age, data.gender, data.engPerc, data.year, data.province, data.answers, data.score],
+        db.run(`INSERT INTO ${usersTableName}(userId, firstName, lastName, major, age, gender, engPerc, year, province, accessToMedia, accessToEngMen, hasTraveled, startedLearningAt, learningTime, score) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [data.userId, data.firstName, data.lastName, data.major, data.age, data.gender, data.engPerc, data.year, data.province,  data.accessToMedia, data.accessToEngMen, data.hasTraveled, data.startedLearningAt, data.learningTime, data.score],
             function (err) {
                 if (err) {
                     console.trace(err.message);
@@ -118,7 +118,11 @@ class DataBase {
                   engPerc engPerc,
                   year year,
                   province province,
-                  answers answers,
+                  accessToMedia accessToMedia,
+                  accessToEngMen accessToEngMen,
+                  hasTraveled hasTraveled,
+                  startedLearningAt startedLearningAt,
+                  learningTime learningTime,
                   score score
            FROM ${usersTableName}
            WHERE userId  = ?`;
