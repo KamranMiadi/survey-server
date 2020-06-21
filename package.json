@@ -11,6 +11,7 @@
   "dependencies": {
     "fastify": "^2.14.1",
     "fastify-cors": "^3.0.3",
+    "fastify-static": "^2.7.0",
     "q": "^1.5.1",
     "sqlite3": "^4.2.0"
   }
