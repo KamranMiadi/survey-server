@@ -62,8 +62,8 @@ class DataBase {
                     }
                 });
                 defered.resolve({
-                    message: `A row has been inserted with id: ${this.lastID}}`,
-                    data: data.userId
+                    message: `A row has been inserted with id: ${this.lastID}`,
+                    userId: data.userId
                 });
 
             });
