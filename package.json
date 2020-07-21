@@ -1,6 +1,10 @@
 {
   "name": "survey-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "changeLog":{
+    "1.0.0" : "first version.",
+    "1.1.0" : "added lastpage to public and changed dataBase columns."
+  },
   "description": "a simple server for my survey project",
   "main": "index.js",
   "scripts": {
