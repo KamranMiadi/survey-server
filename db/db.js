@@ -3,8 +3,8 @@
 
 let sqlite = require('sqlite3').verbose();
 let q = require('q');
-const dbName = 'surveyDb';
-let usersTableName = 'usersTable';
+const dbName = 'surveyDb2';
+let usersTableName = 'usersTable2';
 
 class DataBase {
 
@@ -19,7 +19,7 @@ class DataBase {
 
     createTable() {
         let self = this;
-        db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT,accessToMedia TEXT, accessToEngMen TEXT, hasTraveled TEXT, startedLearningAt TEXT, learningTime TEXT,score TEXT)`)
+        db.run(`CREATE TABLE ${usersTableName}(userId TEXT PRIMARY KEY, major TEXT, age TEXT, gender TEXT, engPerc TEXT, year TEXT, province TEXT,accessToMedia TEXT, accessToEngMen TEXT, hasTraveled TEXT, startedLearningAt TEXT, learningTime TEXT,score TEXT)`)
             .then(function (result) {}).fail(function (err) {
                 console.error('error in createTable------------------->', err);
             });
@@ -39,8 +39,10 @@ class DataBase {
 
         });
         let defered = q.defer();
-        db.run(`INSERT INTO ${usersTableName}(userId, firstName, lastName, major, age, gender, engPerc, year, province, accessToMedia, accessToEngMen, hasTraveled, startedLearningAt, learningTime, score) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [data.userId, data.firstName, data.lastName, data.major, data.age, data.gender, data.engPerc, data.year, data.province,  data.accessToMedia, data.accessToEngMen, data.hasTraveled, data.startedLearningAt, data.learningTime, data.score],
+        data.userId = Math.floor(100000 + Math.random() * 900000);
+        console.log('---------userId---------', data.userId);
+        db.run(`INSERT INTO ${usersTableName}(userId, major, age, gender, engPerc, year, province, accessToMedia, accessToEngMen, hasTraveled, startedLearningAt, learningTime, score) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [data.userId, data.major, data.age, data.gender, data.engPerc, data.year, data.province, data.accessToMedia, data.accessToEngMen, data.hasTraveled, data.startedLearningAt, data.learningTime, data.score],
             function (err) {
                 if (err) {
                     console.trace(err.message);
@@ -59,7 +61,10 @@ class DataBase {
                         console.error('errorInAddToDB------------->>', err);
                     }
                 });
-                defered.resolve(`A row has been inserted with id: ${this.lastID}`);
+                defered.resolve({
+                    message: `A row has been inserted with id: ${this.lastID}}`,
+                    data: data.userId
+                });
 
             });
         return defered.promise;
@@ -110,8 +115,6 @@ class DataBase {
         });
         let defered = q.defer();
         let sql = `SELECT userId userId,
-                  firstName firstName,
-                  lastName lastName,
                   major major,
                   age age,
                   gender gender, 
@@ -159,9 +162,7 @@ class DataBase {
         });
         let defered = q.defer();
         let sql = `SELECT userId userId,
-                      firstName firstName,
-                      lastName lastName,
-                      score score
+                score score
                FROM ${usersTableName}`;
         db.get(sql, (err, rows) => {
             if (err) {
